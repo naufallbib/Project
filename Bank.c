@@ -88,6 +88,34 @@ int main()
            printf("Anda sudah mencapai limit untuk memasukkan sandi!\n");
            return 0;
    }
-
+   do {
+       tampilanMenu();
+       printf("Pilih menu: ");
+       scanf("%d",&pilih);
+    while (getchar() != '\n');
+    
+       switch (pilih){
+        case 1:
+        if (ceksaldo(saldo) == 0){
+            pilih = 4;
+        }
+        break;
+        case 2:
+        if (pemasukan(&saldo) == 0){
+            pilih = 4;
+        }
+        break;
+        case 3:
+        if (pengeluaran(&saldo) == 0){
+            pilih = 4;
+        }
+        break;
+        case 4:
+        break;
+        default:
+            printf("Pilihan tidak valid\n");
+       }
+    } while (pilih != 4);
+    printf("Terimakasih!");
     return 0;
 }
