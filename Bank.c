@@ -21,6 +21,29 @@ int ceksaldo(long long saldo){
     }
     return 1;
 }
+int pemasukan(long long *saldo){
+    int pilihan_lanjut;
+    long long jumlah;
+    printf("Masukkan nominal yang ingin ditambahkan: ");
+    scanf("%lld",&jumlah);
+    while (getchar() != '\n');
+    if (jumlah < 1){
+        printf("Masukkan nomminal > 0!");
+    }else{
+        *saldo += jumlah;
+        printf("Saldo rekening anda berhasil ditambahkan!\n");
+    }
+    printf("1.Kembali ke menu utama\n");
+    printf("2.Keluar\n");
+    printf("silahkan pilih: ");
+    scanf("%d", &pilihan_lanjut);
+    while (getchar() != '\n');
+    if (pilihan_lanjut== 2){
+        return 0;
+    }
+    return 1;
+}
+
 
 int main()
 {
