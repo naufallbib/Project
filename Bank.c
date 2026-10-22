@@ -43,7 +43,28 @@ int pemasukan(long long *saldo){
     }
     return 1;
 }
-
+int pengeluaran(long long *saldo){
+    int pilihan_lanjut;
+    long long jumlah;
+    printf("Masukkan nominal yang ingin dikurangkan: ");
+    scanf("%lld",&jumlah);
+    while (getchar() != '\n');
+    if (jumlah > *saldo){
+        printf("Saldo tidak cukup!\n");
+    }else{
+        *saldo -= jumlah;
+        printf("Transaksi berhasil!\n");
+    }
+    printf("1.Kembali ke menu utama\n");
+    printf("2.Keluar\n");
+    printf("silahkan pilih: ");
+    scanf("%d", &pilihan_lanjut);
+    while (getchar() != '\n');
+    if (pilihan_lanjut== 2){
+        return 0;
+    }
+    return 1;
+}
 
 int main()
 {
