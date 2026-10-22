@@ -11,9 +11,11 @@ void tampilanMenu(){
     printf("3.Pengeluaran\n");
     printf("4.Keluar\n");
 }
-int ceksaldo(long long saldo){
+int ceksaldo(long long saldo_rek, long long tabungan_a){
     int pilihan_lanjut;
-    printf("Saldo rekening anda %lld\n", saldo);
+    printf("======= Saldo =======\n");
+    printf("Saldo Rekening anda: Rp %lld\n", saldo_rek);
+    printf("Saldo Tabungan A anda: Rp %lld\n", tabungan_a);
     printf("1.Kembali ke menu utama\n");
     printf("2.Keluar\n");
     printf("silahkan pilih: ");
@@ -24,17 +26,31 @@ int ceksaldo(long long saldo){
     }
     return 1;
 }
-int pemasukan(long long *saldo){
-    int pilihan_lanjut;
+int pemasukan(long long *saldo_rek, long long *tabungan_a){
+    int pilihan_lanjut, pilihan_tabungan;
     long long jumlah;
-    printf("Masukkan nominal yang ingin ditambahkan: ");
+    printf("======= Pemasukan =======\n");
+    printf("Masukkan nominal yang ingin ditambahkan: Rp. ");
     scanf("%lld",&jumlah);
     while (getchar() != '\n');
     if (jumlah < 1){
         printf("Masukkan nomminal > 0!");
     }else{
-        *saldo += jumlah;
-        printf("Saldo rekening anda berhasil ditambahkan!\n");
+        printf("Pilih jenis tabungan:\n");
+        printf("1. Tabungan Rekening\n");
+        printf("2. Tabungan A\n");
+        printf("silahkan pilih: ");
+        scanf("%d", &pilihan_tabungan);
+        while (getchar() != '\n');
+        if (pilihan_tabungan == 1) {
+            *saldo_rek += jumlah;
+            printf("Saldo rekening anda berhasil ditambahkan!\n");
+        } else if (pilihan_tabungan == 2) {
+            *tabungan_a += jumlah;
+            printf("Saldo tabungan anda berhasil ditambahkan!\n");
+        } else {
+            printf("Pilihan tidak valid!\n");
+        }
         if (jumlah_transaksi < MAX) {
             riwayat[jumlah_transaksi] = jumlah;
             jumlah_transaksi++;
@@ -50,16 +66,29 @@ int pemasukan(long long *saldo){
     }
     return 1;
 }
-int pengeluaran(long long *saldo){
-    int pilihan_lanjut;
+int pengeluaran(long long *saldo_rek, long long *tabungan_a){
+    int pilihan_lanjut, pilihan_tabungan;
     long long jumlah;
-    printf("Masukkan nominal yang ingin dikurangkan: ");
+    printf("======= Pengeluaran =======\n");
+    printf("Pilih jenis tabungan:\n");
+    printf("1. Tabungan Rekening\n");
+    printf("2. Tabungan A\n");
+    printf("silahkan pilih: ");
+    scanf("%d", &pilihan_tabungan);
+    while (getchar() != '\n');
+
+    printf("Masukkan nominal yang ingin dikurangkan: Rp.");
     scanf("%lld",&jumlah);
     while (getchar() != '\n');
-    if (jumlah > *saldo){
+    
+    if (jumlah > *saldo_rek && jumlah > *tabungan_a){
         printf("Saldo tidak cukup!\n");
     }else{
-        *saldo -= jumlah;
+        if (pilihan_tabungan == 1) {
+            *saldo_rek -= jumlah;
+        } else if (pilihan_tabungan == 2) {
+            *tabungan_a -= jumlah;
+        }
         if (jumlah_transaksi < MAX) {
             riwayat[jumlah_transaksi] = -jumlah;
             jumlah_transaksi++;
@@ -79,14 +108,15 @@ int pengeluaran(long long *saldo){
 
 int main()
 {
-   long long saldo= 0;
+   long long saldo_rek= 0;
+   long long tabungan_a= 0;
    int pilih, pin_input, kesempatan;
    kesempatan= 3;
    
    while (kesempatan > 0){
        printf("Masukkan PIN Anda (6 digit): ");
        scanf("%d", &pin_input);
-    while (getchar() != '\n');
+       while (getchar() != '\n');
        if (pin_input != PIN){
            kesempatan--;
            printf("PIN salah, masukkan dengan benar!\n");
@@ -103,21 +133,21 @@ int main()
        tampilanMenu();
        printf("Pilih menu: ");
        scanf("%d",&pilih);
-    while (getchar() != '\n');
+       while (getchar() != '\n');
     
        switch (pilih){
         case 1:
-        if (ceksaldo(saldo) == 0){
+        if (ceksaldo(saldo_rek, tabungan_a) == 0){
             pilih = 4;
         }
         break;
         case 2:
-        if (pemasukan(&saldo) == 0){
+        if (pemasukan(&saldo_rek, &tabungan_a) == 0){
             pilih = 4;
         }
         break;
         case 3:
-        if (pengeluaran(&saldo) == 0){
+        if (pengeluaran(&saldo_rek, &tabungan_a) == 0){
             pilih = 4;
         }
         break;
