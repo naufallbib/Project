@@ -68,6 +68,26 @@ int pengeluaran(long long *saldo){
 
 int main()
 {
-    
+   long long saldo= 0;
+   int pilih, pin_input, kesempatan;
+   kesempatan= 3;
+   
+   while (kesempatan > 0){
+       printf("Masukkan PIN Anda (6 digit): ");
+       scanf("%d", &pin_input);
+    while (getchar() != '\n');
+       if (pin_input != PIN){
+           kesempatan--;
+           printf("PIN salah, masukkan dengan benar!\n");
+       }else{
+           printf("PIN benar, silahkan lanjutkan\n");
+           break;
+       }
+   }
+       if (kesempatan == 0){
+           printf("Anda sudah mencapai limit untuk memasukkan sandi!\n");
+           return 0;
+   }
+
     return 0;
 }
