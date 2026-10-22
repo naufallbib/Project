@@ -1,6 +1,9 @@
 #include <stdio.h>
 #define PIN 123456
+#define MAX 100
 
+long long riwayat[MAX];
+int jumlah_transaksi = 0;
 void tampilanMenu(){
     printf("\n======= BANK =======\n");
     printf("1.Cek saldo\n");
@@ -32,6 +35,10 @@ int pemasukan(long long *saldo){
     }else{
         *saldo += jumlah;
         printf("Saldo rekening anda berhasil ditambahkan!\n");
+        if (jumlah_transaksi < MAX) {
+            riwayat[jumlah_transaksi] = jumlah;
+            jumlah_transaksi++;
+        }
     }
     printf("1.Kembali ke menu utama\n");
     printf("2.Keluar\n");
@@ -53,6 +60,10 @@ int pengeluaran(long long *saldo){
         printf("Saldo tidak cukup!\n");
     }else{
         *saldo -= jumlah;
+        if (jumlah_transaksi < MAX) {
+            riwayat[jumlah_transaksi] = -jumlah;
+            jumlah_transaksi++;
+        }
         printf("Transaksi berhasil!\n");
     }
     printf("1.Kembali ke menu utama\n");
@@ -113,9 +124,17 @@ int main()
         case 4:
         break;
         default:
-            printf("Pilihan tidak valid\n");
-       }
-    } while (pilih != 4);
-    printf("Terimakasih!");
+        printf("Pilihan tidak valid\n");
+    }
+} while (pilih != 4);
+printf("======= Riwayat Transaksi =======\n");
+for (int i = 0; i < jumlah_transaksi; i++) {
+    if (riwayat[i] > 0) {
+        printf("%d. Pemasukan: %lld\n", i + 1, riwayat[i]);
+    } else{
+        printf("%d. Pengeluaran: %lld\n", i + 1, -riwayat[i]);
+        printf("-------- Terimakasih! -------\n");
+    }
+}
     return 0;
 }
