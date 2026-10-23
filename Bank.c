@@ -12,22 +12,14 @@ void tampilanMenu(){
     printf("4.Keluar\n");
 }
 int ceksaldo(long long saldo_rek, long long tabungan_a){
-    int pilihan_lanjut;
     printf("======= Saldo =======\n");
     printf("Saldo Rekening anda: Rp %lld\n", saldo_rek);
     printf("Saldo Tabungan A anda: Rp %lld\n", tabungan_a);
-    printf("1.Kembali ke menu utama\n");
-    printf("2.Keluar\n");
-    printf("silahkan pilih: ");
-    scanf("%d", &pilihan_lanjut);
-    while (getchar() != '\n');
-    if (pilihan_lanjut== 2){
-        return 0;
-    }
     return 1;
-}
+    }
+
 int pemasukan(long long *saldo_rek, long long *tabungan_a){
-    int pilihan_lanjut, pilihan_tabungan;
+    int pilihan_tabungan;
     long long jumlah;
     printf("======= Pemasukan =======\n");
     printf("Masukkan nominal yang ingin ditambahkan: Rp. ");
@@ -55,19 +47,11 @@ int pemasukan(long long *saldo_rek, long long *tabungan_a){
             riwayat[jumlah_transaksi] = jumlah;
             jumlah_transaksi++;
         }
+        return 1;
     }
-    printf("1.Kembali ke menu utama\n");
-    printf("2.Keluar\n");
-    printf("silahkan pilih: ");
-    scanf("%d", &pilihan_lanjut);
-    while (getchar() != '\n');
-    if (pilihan_lanjut== 2){
-        return 0;
     }
-    return 1;
-}
 int pengeluaran(long long *saldo_rek, long long *tabungan_a){
-    int pilihan_lanjut, pilihan_tabungan;
+    int pilihan_tabungan;
     long long jumlah;
     printf("======= Pengeluaran =======\n");
     printf("Pilih jenis tabungan:\n");
@@ -94,17 +78,9 @@ int pengeluaran(long long *saldo_rek, long long *tabungan_a){
             jumlah_transaksi++;
         }
         printf("Transaksi berhasil!\n");
+        return 1;
     }
-    printf("1.Kembali ke menu utama\n");
-    printf("2.Keluar\n");
-    printf("silahkan pilih: ");
-    scanf("%d", &pilihan_lanjut);
-    while (getchar() != '\n');
-    if (pilihan_lanjut== 2){
-        return 0;
     }
-    return 1;
-}
 
 int main()
 {
@@ -126,7 +102,7 @@ int main()
        }
    }
        if (kesempatan == 0){
-           printf("Anda sudah mencapai limit untuk memasukkan sandi!\n");
+           printf("Anda sudah mencapai limit untuk memasukkan sandi, silahkan coba lagi nanti!\n");
            return 0;
    }
    do {
