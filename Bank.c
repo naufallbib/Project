@@ -65,13 +65,16 @@ int pengeluaran(long long *saldo_rek, long long *tabungan_a){
     scanf("%lld",&jumlah);
     while (getchar() != '\n');
     
-    if (jumlah > *saldo_rek && jumlah > *tabungan_a){
+    if (jumlah > *saldo_rek || jumlah > *tabungan_a){
         printf("Saldo tidak cukup!\n");
     }else{
         if (pilihan_tabungan == 1) {
             *saldo_rek -= jumlah;
         } else if (pilihan_tabungan == 2) {
             *tabungan_a -= jumlah;
+        }else {
+            printf("Pilihan tidak valid!\n");
+            return 0;
         }
         if (jumlah_transaksi < MAX) {
             riwayat[jumlah_transaksi] = -jumlah;
@@ -137,10 +140,10 @@ printf("======= Riwayat Transaksi =======\n");
 for (int i = 0; i < jumlah_transaksi; i++) {
     if (riwayat[i] > 0) {
         printf("%d. Pemasukan: %lld\n", i + 1, riwayat[i]);
-    } else{
+    } else {
         printf("%d. Pengeluaran: %lld\n", i + 1, -riwayat[i]);
-        printf("-------- Terimakasih! -------\n");
     }
 }
+printf("-------- Terimakasih! -------\n");
     return 0;
 }
